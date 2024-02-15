@@ -16,6 +16,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: postgres
+  host: localhost
+  username: <%= ENV["DATABASE_USER_NAME"] %>
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -23,7 +25,7 @@ default: &default
 development:
   <<: *default
   database: viral_backend_api_development
-  password: 5432
+  password: <%= ENV["RESORT_BOOKING_BACK_END_DATABASE_PASSWORD"] %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -58,7 +60,7 @@ development:
 test:
   <<: *default
   database: viral_backend_api_test
-  password: 5432
+  password: <%= ENV["RESORT_BOOKING_BACK_END_DATABASE_PASSWORD"] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,4 +86,5 @@ production:
   <<: *default
   database: viral_backend_api_production
   username: viral_backend_api
-  password: 5432
+  password: <%= ENV["RESORT_BOOKING_BACK_END_DATABASE_PASSWORD"] %>
+  url: <%= ENV["MY_APP_DATABASE_URL"] %>
